@@ -1,0 +1,297 @@
+cd react-project
+git clone https://github.com/abcdevelop/react-boilerplate-app.git react-expensify-app
+cd react-expensify-app
+
+rename boilletplate with expensify in
+index.html
+package.json
+app.js
+
+yarn install
+yarn add react-router-dom@4.2.2
+
+yarn run build:dev
+yarn run dev-server
+
+
+yarn add redux@3.7.2
+
+yarn add uuid@3.1.0
+
+
+yarn add babel-plugin-transform-object-rest-spread@6.23.0
+ajouter une ligne dans babel.rc
+{
+  "presets":[
+    "env",
+    "react"
+  ],
+  "plugins":[
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
+}
+
+
+yarn add react-redux@5.0.5
+
+yarn add moment@2.18.1 react-dates@12.7.0 react-addons-shallow-compare@15.6.0
+
+npm i -g npm
+
+npm install --global yarn
+
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+    const store = createStore(
+        combineReducers({
+            expenses: expensesReducer,
+            filters: filtersReducer
+        }),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
+
+
+https://facebook.github.io/jest/
+yarn add jest@20.0.4
+yarn run test
+or
+yarn test
+yarn test -- --watch
+
+
+yarn add react-test-renderer@16.0.0
+
+yarn add enzyme@3.0.0 enzyme-adapter-react-16@1.0.0 raf@3.3.2
+-------------
+setupTests.js
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({
+    adapter:new Adapter()
+});
+-------------
+jest.config.json
+{
+    "setupFiles": [
+        "raf/polyfill",
+        "<rootDir>/src/tests/setupTests.js"
+    ]
+}
+-------------
+package.json
+    "test": "jest --config=jest.config.json"
+-------------
+
+
+yarn add enzyme-to-json@3.0.1
+
+-------------------------------------
+
+package.json
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
+
+
+webpack.config.js
+module.exports = (env) => {
+    //console.log('env',env);
+    const isProduction = env === 'production';
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
+
+
+yarn run build:prod
+
+index.html
+    <script src="/bundle.js"></script>
+
+
+--------------------------------------------
+
+yarn add extract-text-webpack-plugin@3.0.0
+
+webpack.config.js
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+...
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+...
+                test: /\.s?css$/,
+                use: CSSExtract.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
+...
+        plugins: [
+            CSSExtract
+        ],
+
+index.html
+    <link rel="stylesheet" text="text/css" href="/styles.css">
+
+---------------------------------
+
+yarn add express@4.15.4
+
+
+server/server.js
+const path = require('path');
+const express = require('express');
+const app = express();
+const publicPath = path.join(__dirname, '..', 'public');
+const port = process.env.PORT || 3000;
+
+app.use(express.static(publicPath));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+app.listen(port, () => {
+    console.log(`Server is up on port: ${port}`);
+});
+
+
+
+webpack.json
+    "start": "node server/server.js",
+
+
+yarn run build:prod
+yarn run start
+
+------------------------------
+
+www.heroku.com
+install heroku
+
+heroku --version
+heroku-cli/6.14.36-15f8a25 (windows-x64) node-v8.7.0
+
+heroku login
+Enter your Heroku credentials:
+Email: bruno.panaget@yahoo.fr
+Password: ************
+Logged in as bruno.panaget@yahoo.fr
+
+heroku create react-expensify-app
+or
+heroku create
+
+git remote
+git remote -v
+
+git status
+git add .
+git commit -m "blablabla"
+git push
+git push heroku master
+heroku open
+heroku logs
+
+yarn add chalk --dev
+reorganize dev dependencies
+
+delete node_module
+
+yarn install --production
+
+yarn install
+
+webpack.config.js
+            publicPath:'/dist/'
+
+yarn run dev-server
+
+yarn run build:prod
+
+yarn run start
+
+http://localhost:3000/
+
+.gitignore
+public/dist/
+
+git commit -am "Setup devDependencies and dist folder"
+git push
+git push heroku master
+
+-------------------------------
+
+yarn run dev-server
+yarn test -- --watch
+
+yarn add numeral@2.0.6
+
+yarn run dev-server
+
+---------------------------------
+
+yarn add firebase@4.2.0
+
+yarn run dev-server
+
+redux-thunk
+
+yarn add redux-thunk@2.2.0
+
+yarn add redux-mock-store@1.2.3
+
+yarn add --dev cross-env@5.0.5
+
+yarn add --dev dotenv@4.0.0
+
+---------------------------------
+
+heroku remote -v
+git remote add heroku git@heroku.com:react-expensify-app.git
+heroku remote -v
+
+git push
+git push heroku master
+
+
+heroku config
+heroku config:set KEY=value
+heroku config
+heroku config:unset KEY
+heroku config
+
+heroku config:set FIREBASE_API_KEY=kldnqscd46305fqv03qsqqsc
+ FIREBASE_AUTH_DOMAIN=expensify-36223.firebaseapp.com FIREBASE_DATABASE_URL=https://expensify-36223.firebaseio.com FIREBASE_P
+ROJECT_ID=expensify-36223 FIREBASE_STORAGE_BUCKET=expensify-36223.appspot.com FIREBASE_MESSAGING_SENDER_ID=12315645443
+
+git remote -v
+heroku  https://git.heroku.com/enigmatic-taiga-34949.git (fetch)
+heroku  https://git.heroku.com/enigmatic-taiga-34949.git (push)
+origin  https://github.com/abcdevelop/react-expensify-app.git (fetch)
+origin  https://github.com/abcdevelop/react-expensify-app.git (push)
+
+à voir si cela peut servir:
+git remote add heroku https://git.heroku.com/enigmatic-taiga-34949.git
+
+------------------------------
+
+yarn add history@4.7.2
+
+
+------------------------------
+
+yarn add babel-polyfill@6.26.0
+
+dans webpack.config.js
+    return {
+        entry: ['babel-polyfill','./src/app.js'],
