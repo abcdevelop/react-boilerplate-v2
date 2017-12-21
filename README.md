@@ -1,1 +1,1 @@
-# react-expensify-app
+# react-boilerplate-app
